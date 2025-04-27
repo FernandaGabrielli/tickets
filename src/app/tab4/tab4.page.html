@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Relatórios e Configurações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Relatórios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        Gerar Relatório
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-item>
+        <ion-select label="Período" [(ngModel)]="periodoRelatorio" (ionChange)="atualizarFormatoData()">
+          <ion-select-option value="diario">Diário</ion-select-option>
+          <ion-select-option value="mensal">Mensal</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-input [value]="formatarData()" readonly (click)="abrirDatetime()"></ion-input>
+        <ion-datetime 
+          #datetime
+          [(ngModel)]="dataSelecionada"
+          [presentation]="periodoRelatorio === 'diario' ? 'date' : 'month-year'"
+          locale="pt-BR"
+          class="hidden-datetime"
+          (ionChange)="fecharDatetime()">
+        </ion-datetime>
+      </ion-item>
+
+      <ion-button expand="block" (click)="gerarRelatorio()" [disabled]="!dataSelecionada">
+        Gerar Relatório
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="relatorioGerado">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        Resultados do Relatório
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ periodoRelatorio === 'diario' ? 'Diário' : 'Mensal' }} - 
+        {{ formatarData() }}
+      </ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Total de Atendimentos</ion-label>
+          <ion-label slot="end" class="ion-text-end">{{dadosRelatorio.totalAtendimentos}}</ion-label>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Tempo Médio</ion-label>
+          <ion-label slot="end" class="ion-text-end">{{dadosRelatorio.tempoMedio}}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item *ngFor="let item of dadosRelatorio.detalhes">
+          <ion-label>Senhas {{item.tipo}}</ion-label>
+          <ion-label slot="end" class="ion-text-end">
+            {{item.quantidade}} ({{item.tempoMedio}})
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" color="success" (click)="exportarRelatorio()">
+        <ion-icon name="download-outline" slot="start"></ion-icon>
+        Exportar Relatório (Excel)
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

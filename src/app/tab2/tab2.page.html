@@ -1,17 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Emissão de Senhas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecione o tipo de atendimento</ion-card-title>
+      <ion-card-subtitle>Expediente: {{statusExpediente}} ({{horarioExpediente.abertura}}h às {{horarioExpediente.fechamento}}h)</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" color="danger" (click)="emitirSenha('SP')">
+        Senha Prioritária (SP)
+      </ion-button>
+      <ion-button expand="block" color="primary" (click)="emitirSenha('SG')">
+        Senha Geral (SG)
+      </ion-button>
+      <ion-button expand="block" color="success" (click)="emitirSenha('SE')">
+        Retirada de Exames (SE)
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card *ngIf="senhaEmitida">
+    <ion-card-header>
+      <ion-card-title>Sua senha</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="senha-container">
+      <div class="senha-numero">{{ senhaEmitida }}</div>
+      <div class="senha-tipo">Tipo: {{ tipoSenhaEmitida }}</div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,0 +1,36 @@
+.description {
+    color: var(--ion-color-medium);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  ion-card {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  ion-item {
+    --padding-start: 10px;
+    --inner-padding-end: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    h2 {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    p {
+      color: var(--ion-color-medium);
+      font-size: 0.9rem;
+    }
+  }
+  
+  ion-icon {
+    font-size: 1.5rem;
+  }

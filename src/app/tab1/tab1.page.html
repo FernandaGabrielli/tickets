@@ -1,17 +1,44 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Controle de Atendimento</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bem-vindo ao Sistema de Atendimento</ion-card-title>
+      <ion-card-subtitle>Laboratórios Médicos - UNINASSAU</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p class="description">Sistema de controle de filas para laboratórios médicos com priorização de atendimentos.</p>
+      
+      <ion-list lines="none">
+        <ion-item button routerLink="/tabs/tab2">
+          <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
+          <ion-label>
+            <h2>Agente Cliente (AC)</h2>
+            <p>Emissão de senhas de atendimento</p>
+          </ion-label>
+        </ion-item>
+        
+        <ion-item button routerLink="/tabs/tab3">
+          <ion-icon slot="start" name="people-outline" color="secondary"></ion-icon>
+          <ion-label>
+            <h2>Agente Atendente (AA)</h2>
+            <p>Painel de chamadas e atendimento</p>
+          </ion-label>
+        </ion-item>
+        
+        <ion-item button routerLink="/tabs/tab4">
+          <ion-icon slot="start" name="settings-outline" color="tertiary"></ion-icon>
+          <ion-label>
+            <h2>Agente Sistema (AS)</h2>
+            <p>Configurações e relatórios</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

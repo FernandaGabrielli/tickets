@@ -1,0 +1,39 @@
+/* Estilo para o input de data */
+ion-input {
+    background: var(--ion-color-light);
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  /* Esconde o datetime real */
+  .hidden-datetime {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Melhora a visualização dos cards */
+  ion-card {
+    margin: 16px;
+    ion-card-header {
+      background: var(--ion-color-light);
+    }
+  }
+  
+  /* Estilo para os itens da lista */
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    ion-label[slot="end"] {
+      font-weight: 500;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  /* Espaçamento dos botões */
+  ion-button {
+    margin-top: 16px;
+  }

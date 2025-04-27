@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Relatórios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <ion-segment [(ngModel)]="tipoRelatorio" (ionChange)="carregarRelatorio()">
+      <ion-segment-button value="diario">
+        <ion-label>Diário</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="mensal">
+        <ion-label>Mensal</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+    <ion-item>
+      <ion-label position="stacked">Data</ion-label>
+      <ion-input type="date" [(ngModel)]="dataSelecionada"></ion-input>
+    </ion-item>
+  
+    <ion-button expand="block" (click)="carregarRelatorio()" class="ion-margin-top">
+      Carregar Relatório
+    </ion-button>
+  
+    <div *ngIf="carregando" class="ion-text-center ion-padding">
+      <ion-spinner></ion-spinner>
+      <p>Carregando relatório...</p>
+    </div>
+  
+    <div *ngIf="relatorio && !carregando">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Resumo do Relatório</ion-card-title>
+          <ion-card-subtitle>{{tipoRelatorio === 'diario' ? 'Diário' : 'Mensal'}} - {{dataSelecionada}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-card color="light">
+                  <ion-card-header>
+                    <ion-card-title>Total Emitidas</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content class="ion-text-center">
+                    <h1>{{relatorio.totalEmitidas}}</h1>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card color="light">
+                  <ion-card-header>
+                    <ion-card-title>Total Atendidas</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content class="ion-text-center">
+                    <h1>{{relatorio.totalAtendidas}}</h1>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card color="light">
+                  <ion-card-header>
+                    <ion-card-title>Não Atendidas</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content class="ion-text-center">
+                    <h1>{{relatorio.totalEmitidas - relatorio.totalAtendidas}}</h1>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Detalhamento por Tipo de Senha</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of relatorio.detalhes">
+              <ion-label>
+                <h2>Senha {{item.tipo}}</h2>
+                <p>Emitidas: {{item.emitidas}} | Atendidas: {{item.atendidas}} ({{(item.atendidas / item.emitidas * 100).toFixed(1)}}%)</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-button expand="block" color="success" (click)="exportarRelatorio()">
+        <ion-icon name="download" slot="start"></ion-icon>
+        Exportar Relatório
+      </ion-button>
+    </div>
+  </ion-content>
