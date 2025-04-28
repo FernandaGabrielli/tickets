@@ -1,4 +1,5 @@
 Sistema de Controle de Atendimento - Laboratórios Médicos UNINASSAU
+Desenvolvido por Fernanda Gabrielli, Maria Fernanda Buonafina e Clara Heloísa.
 Descrição
 
 Sistema desenvolvido com Ionic Angular para gestão de filas em laboratórios médicos, permitindo a emissão de senhas, chamada de atendimentos e geração de relatórios. O sistema segue um modelo de priorização com três tipos de senhas e oferece diferentes interfaces para cada tipo de usuário (Agente Cliente, Agente Atendente e Agente Sistema).
